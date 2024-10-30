@@ -1,0 +1,28 @@
+<div *ngIf="loading">Cargando datos...</div>
+<table class="table table-hover" *ngIf="!loading">
+  <thead class="table-dark">
+    <tr>
+      <th>Identificador</th>
+      <th>SIM - No.1</th>
+      <th>SIM - No.2</th>
+      <th>Numero Télefonico</th>
+      <th>Producto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr 
+      *ngFor="let item of data" 
+      (mouseenter)="resaltar(item)" 
+      (mouseleave)="quitarResaltar(item)" 
+      (click)="verDetalle(item)"
+      [class.table-active]="item === itemSeleccionado"
+      style="cursor: pointer"
+    >
+      <td>{{ item.idAltan }}</td>
+      <td>{{ item.idIMSI1 }}</td>
+      <td>{{ item.idIMSI2 || 'N/A' }}</td>
+      <td>{{ item.idMSISDN }}</td>
+      <td>{{ item.producto }}</td>
+    </tr>
+  </tbody>
+</table>

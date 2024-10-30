@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "idAltan": 1001,
+        "idIMSI1": 123456789012345,
+        "idICCID": 8901234567890123456,
+        "idMSISDN": 9876543210,
+        "producto": "HBB"
+    },
+    {
+        "id": 2,
+        "idAltan": 1002,
+        "idIMSI1": 123456789012346,
+        "idICCID": 8901234567890123457,
+        "idMSISDN": 9876543211,
+        "producto": "MOV"
+    },
+    {
+        "id": 3,
+        "idAltan": 1003,
+        "idIMSI1": 123456789012347,
+        "idIMSI2": 223456789012347,
+        "idICCID": 8901234567890123458,
+        "idMSISDN": 9876543212,
+        "producto": "MIFI"
+    }
+]

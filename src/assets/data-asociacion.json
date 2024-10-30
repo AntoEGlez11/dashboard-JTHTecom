@@ -1,0 +1,11 @@
+{
+  "id": 123,
+  "vehiculo": {
+    "modelo": "'Corolla'",
+    "anio": "2021",
+    "serie": "'JTDBURHE5LJ123456'",
+    "motor": "'1HZ'",
+    "color": "'Blanco'",
+    "version": "'XLE'"
+  }
+}

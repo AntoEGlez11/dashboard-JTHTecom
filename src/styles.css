@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sidebar {
+    width: 250px;
+    min-height: 100vh;
+  }
+  
+  main {
+    margin: 20px;
+  }
+  
+  .card {
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .navbar {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+  }
+  .nav-link {
+    transition: color 0.3s ease-in-out;
+  }
+  .nav-link:hover {
+    color: #f8f9fa;
+  }
+  
