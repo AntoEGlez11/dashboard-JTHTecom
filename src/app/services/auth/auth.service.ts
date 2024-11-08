@@ -9,60 +9,55 @@ import { AuthRequest } from '../../interfaces/authRequest';
 })
 export class AuthService {
 
-  private apiUrl = 'assets/json/mock-login.json';  // URL del backend
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
+  private validUsers: { email: string; password: string; rol: string }[] = [
+    { email: 'admin@admin.com', password: 'admin', rol: 'admin' },
+    { email: 'user@user.com', password: 'user', rol: 'user' }
+  ];
 
-  // login(credentials:AuthRequest):Observable<authResponse> {
-  //   console.log(credentials);
-  //   const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-  //   return this.http.get<authResponse>(this.apiUrl, { headers }).pipe(
-  //     map((response) => {
-  //       if (
-  //         credentials.email === response.email &&
-  //         credentials.password === response.password
-  //       ) {
-  //         localStorage.setItem('token', response.token);
-  //         localStorage.setItem('rol', response.rol);
-  //         console.log('Inicio de sesión exitoso');
-  //         return response;
-  //       } else {
-  //         throw new Error('Credenciales inválidas');
-  //       }
-  //     }),
-  //     catchError(this.handleError)
-  //   );
-  // }
   login(credentials: AuthRequest): Observable<authResponse> {
     console.log('Intento de login con:', credentials);
 
-    // Simula una respuesta exitosa para cualquier credencial
-    const mockResponse: authResponse = {
-      token: 'mock-jwt-token',
-      rol: credentials.email.includes('admin') ? 'admin' : 'user',
-      password: '',
-      email: ''
-    };
-
-    // Simulación con retraso opcional para ver indicadores de carga
-    return of(mockResponse).pipe(
-      delay(1000), // Simula una espera de 1 segundo
-      catchError(this.handleError) // Manejo de errores si es necesario
+    const matchedUser = this.validUsers.find(
+      user => user.email === credentials.email && user.password === credentials.password
     );
+
+    if (matchedUser) {
+      const response: authResponse = {
+        token: 'mock-jwt-token',
+        rol: matchedUser.rol,
+        email: matchedUser.email,
+        password: ''
+      };
+
+      // Guardar datos en localStorage
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('rol', response.rol);
+
+      console.log('Inicio de sesión exitoso:', matchedUser.rol);
+
+      return of(response).pipe(
+        delay(1000), // Simula una espera de 1 segundo
+        catchError(this.handleError)
+      );
+    } else {
+      console.error('Credenciales inválidas');
+      return throwError(() => new Error('Credenciales inválidas'));
+    }
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('rol');
   }
 
-  private handleError(error:HttpErrorResponse){
-    if (error.status===0) {
-      console.error('se ha producido un error', error.error);
-    }else{
-      console.error('backend retorno codigo de estado', error.status, error.error);
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('Se ha producido un error:', error.error);
+    } else {
+      console.error('El backend retornó un código de estado:', error.status, error.error);
     }
-    return throwError(()=> new Error('Algo fallo. Por favor intente nuevamente'));
+    return throwError(() => new Error('Algo falló. Por favor intente nuevamente'));
   }
 }

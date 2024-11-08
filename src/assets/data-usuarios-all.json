@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "nombre": "Carlos Mendoza",
+      "rol": "Administrador",
+      "estatus": "Activo"
+    },
+    {
+      "id": 2,
+      "nombre": "Ana López",
+      "rol": "Usuario",
+      "estatus": "Inactivo"
+    },
+    {
+      "id": 3,
+      "nombre": "Luis Ramírez",
+      "rol": "Supervisor",
+      "estatus": "Activo"
+    }
+  ]

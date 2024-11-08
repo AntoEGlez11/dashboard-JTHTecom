@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { dataAltan } from '../../interfaces/dataAltan';
-import { enviroment } from '../../config/enviroments';
+import { environment } from '../../config/environments';
 
 @Injectable({
     providedIn: 'root'
@@ -11,15 +11,15 @@ export class DataTecomService {
     constructor(private http:HttpClient) { }
 
     getDataTecom(): Observable<dataAltan[]> {
-        console.log(enviroment.apiDataAltan);
+        console.log(environment.apiDataAltan);
         
-        return this.http.get<dataAltan[]>(enviroment.apiDataAltan).pipe(
+        return this.http.get<dataAltan[]>(environment.apiDataAltan).pipe(
             catchError(this.handleError)
         )
     }
 
     asociarVehiculo(asociacion: { id: any; vehiculo: string }): Observable<any> {
-        return this.http.post(`${enviroment.apiDataAsociacion}`, asociacion).pipe(
+        return this.http.post(`${environment.apiDataAsociacion}`, asociacion).pipe(
             catchError(this.handleError)
         );
     }

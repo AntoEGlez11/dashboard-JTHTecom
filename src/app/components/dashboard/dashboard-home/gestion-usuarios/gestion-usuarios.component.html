@@ -1,1 +1,202 @@
-<p>gestion-usuarios works!</p>
+<div class="container mt-4">
+  <!-- Filtros -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar por nombre"
+        [(ngModel)]="filtroNombre"
+      />
+    </div>
+    <div class="col-md-4">
+      <select
+        class="form-control"
+        [(ngModel)]="filtroRol"
+        aria-label="Seleccionar rol"
+      >
+        <option value="">Todos los roles</option>
+        <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+      </select>
+    </div>
+    <div class="col-md-4 text-right">
+      <button
+        class="btn btn-primary"
+        (click)="abrirModalNuevoUsuario()"
+      >
+        Agregar Usuario
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de usuarios -->
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuariosFiltrados()">
+          <td>{{ usuario.nombre }} {{ usuario.apellidoPaterno }} {{ usuario.apellidoMaterno }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.roles[0] }}</td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm"
+              (click)="abrirModalEditar(usuario)"
+            >
+              Editar
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="eliminarUsuario(usuario.id)"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal de usuario -->
+  <div
+    class="modal fade"
+    id="usuarioModal"
+    tabindex="-1"
+    aria-labelledby="usuarioModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="usuarioModalLabel">
+            {{ esNuevoUsuario ? 'Nuevo Usuario' : 'Editar Usuario' }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="cerrarModal('usuarioModal')"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form #usuarioForm="ngForm">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                [(ngModel)]="usuarioSeleccionado.nombre"
+                name="nombre"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+              <input
+                type="text"
+                class="form-control"
+                id="apellidoPaterno"
+                [(ngModel)]="usuarioSeleccionado.apellidoPaterno"
+                name="apellidoPaterno"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+              <input
+                type="text"
+                class="form-control"
+                id="apellidoMaterno"
+                [(ngModel)]="usuarioSeleccionado.apellidoMaterno"
+                name="apellidoMaterno"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                [(ngModel)]="usuarioSeleccionado.email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                [(ngModel)]="usuarioSeleccionado.password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="rol" class="form-label">Rol</label>
+              <select
+                class="form-control"
+                [(ngModel)]="usuarioSeleccionado.roles[0]"
+                name="rol"
+                required
+              >
+                <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Teléfono</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phoneNumber"
+                [(ngModel)]="usuarioSeleccionado.phoneNumber"
+                name="phoneNumber"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="dateOfBirth" class="form-label">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                class="form-control"
+                id="dateOfBirth"
+                [(ngModel)]="usuarioSeleccionado.dateOfBirth"
+                name="dateOfBirth"
+                required
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                (click)="cerrarModal('usuarioModal')"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="guardarCambios()"
+                [disabled]="!usuarioForm.form.valid"
+              >
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
