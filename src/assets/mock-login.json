@@ -1,6 +1,5 @@
 {
   "email": "admin@example.com",
-  "password": "admin123",
-  "rol": "admin",
+  "rol": "user",
   "token": "mock-jwt-token"
 }

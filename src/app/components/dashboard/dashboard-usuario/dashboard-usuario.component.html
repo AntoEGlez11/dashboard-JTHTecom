@@ -1,0 +1,77 @@
+<div class="container mt-4">
+    <h2 class="text-center">Bienvenido, {{ usuario.nombreCompleto }}</h2>
+    
+    <div class="row">
+      <!-- Columna Izquierda -->
+      <div class="col-md-6">
+        
+        <!-- Datos Personales -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Datos Personales</h5>
+          </div>
+          <div class="card-body">
+            <p><strong>Correo Electrónico:</strong> {{ usuario.email }}</p>
+            <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+          </div>
+        </div>
+        
+        <!-- Opciones de Compra -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Opciones de Compra de Datos</h5>
+          </div>
+          <div class="card-body">
+            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(500)">Comprar 500 MB</button>
+            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(1000)">Comprar 1 GB</button>
+            <button class="btn btn-primary w-100" (click)="comprarPaquete(5000)">Comprar 5 GB</button>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Columna Derecha -->
+      <div class="col-md-6">
+        
+        <!-- Paquete Contratado -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Paquete de Datos Contratado</h5>
+          </div>
+          <div class="card-body">
+            <p><strong>MB Restantes:</strong> {{ paquete.mbRestantes }} MB</p>
+            <p><strong>Límite de Datos:</strong> {{ paquete.mbTotal }} MB</p>
+            <p><strong>Fecha de Vencimiento:</strong> {{ paquete.fechaVencimiento | date }}</p>
+          </div>
+        </div>
+        
+        <!-- Historial de Consumo -->
+        <div class="card mb-4" *ngIf="historial.length > 0">
+          <div class="card-header">
+            <h5>Historial de Consumo</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let item of historial">
+                {{ item.fecha | date }} - {{ item.datosUsados }} MB usados
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <!-- Soporte (a todo el ancho debajo de las columnas) -->
+    <div class="card mt-4">
+      <div class="card-header">
+        <h5>Soporte</h5>
+      </div>
+      <div class="card-body">
+        <p>¿Necesitas ayuda? Contacta a soporte:</p>
+        <p><strong>Teléfono:</strong> 800-123-4567</p>
+        <p><strong>Email:</strong> soporte.com</p>
+      </div>
+    </div>
+  </div>
+  

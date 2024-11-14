@@ -1,25 +1,27 @@
-<div *ngIf="item" class="container mt-5 p-4 border rounded shadow-lg">
+<div *ngIf="item" class="container mt-5 p-4 border rounded shadow-lg bg-light">
   <div class="row">
     <!-- Cuadro de Datos del Usuario -->
-    <div class="col-md-5 p-3 border-end">
-      <h4 class="text-primary">Datos del Usuario #{{ item.id }}</h4>
-      <p><strong>ID Altán:</strong> {{ item.idAltan }}</p>
-      <p><strong>IMSI1:</strong> {{ item.idIMSI1 }}</p>
-      <p><strong>ICCID:</strong> {{ item.idICCID }}</p>
-      <p><strong>Producto:</strong> {{ item.producto }}</p>
+    <div class="col-md-5 p-4 mb-4 mb-md-0 border-end">
+      <h4 class="text-primary mb-3">Datos del SIM #{{ item.id }}</h4>
+      <ul class="list-unstyled">
+        <li><strong>ID Altán:</strong> {{ item.idAltan }}</li>
+        <li><strong>IMSI1:</strong> {{ item.idIMSI1 }}</li>
+        <li><strong>ICCID:</strong> {{ item.idICCID }}</li>
+        <li><strong>Producto:</strong> {{ item.producto }}</li>
+      </ul>
     </div>
 
     <!-- Flecha Intermedia -->
     <div class="col-md-2 d-flex align-items-center justify-content-center">
-      <i class="bi bi-arrow-right-circle-fill" style="font-size: 2rem; color: #0d6efd;"></i>
+      <i class="bi bi-arrow-right-circle-fill" style="font-size: 2.5rem; color: #0d6efd;"></i>
     </div>
 
     <!-- Cuadro de Datos del Vehículo -->
-    <div class="col-md-5 p-3">
-      <h4 class="text-secondary">Datos del Vehículo</h4>
+    <div class="col-md-5 p-4">
+      <h4 class="text-secondary mb-3">Datos del Vehículo</h4>
       <form [formGroup]="vehiculoForm" (ngSubmit)="asociarVehiculo()">
         <div class="mb-3">
-          <label for="modelo" class="form-label">Modelo:</label>
+          <label for="modelo" class="form-label">Modelo | Model | simbolo chino:</label>
           <input id="modelo" type="text" class="form-control" formControlName="modelo" />
         </div>
         <div class="mb-3">
@@ -43,7 +45,7 @@
           <input id="version" type="text" class="form-control" formControlName="version" />
         </div>
 
-        <button type="submit" class="btn btn-success w-100 mt-3">
+        <button type="submit" class="btn btn-primary w-100 mt-3">
           <i class="bi bi-link"></i> Asociar Vehículo
         </button>
       </form>

@@ -73,4 +73,11 @@ export class UsuariosService {
       catchError(this.handleError)
     );
   }
+  obtenerDatosUsuarioLogueado(): Observable<any> {
+    // this.url = `${environment.apiUsuarios}/logged-user`
+    const url = 'assets/data-logueado-user.json';
+    return this.http.get<any>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
 }

@@ -1,0 +1,52 @@
+/* Aseguramos que html y body ocupen toda la altura de la pantalla */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* app-root debe ocupar toda la altura disponible */
+app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Esto asegura que ocupe todo el espacio */
+}
+
+/* Aseguramos que el contenedor de contenido ocupe el espacio restante */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Esto hace que el contenido se expanda */
+}
+
+/* El main debería ocupar todo el espacio disponible, empujando el footer hacia abajo */
+main {
+    flex-grow: 1; /* Hace que el main crezca y ocupe el espacio restante */
+}
+
+/* Estilo básico para el footer */
+app-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.content-wrapper {
+    position: relative; /* Necesario para que el ::before funcione correctamente */
+}
+
+.content-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/img/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: -1; /* Envía la imagen al fondo */
+}

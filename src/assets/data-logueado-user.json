@@ -1,0 +1,13 @@
+{
+    "user": {
+      "email": "usuario@example.com",
+      "name": "Juan Pérez",
+      "phone": "+521234567890"
+    },
+    "internetData": {
+      "includedData": "10GB",
+      "availableData": "5GB",
+      "validity": "12/2024",
+      "status": "Activo"
+    }
+  }

@@ -41,14 +41,12 @@ export class LoginComponent {
 
     const credentials: AuthRequest = {
       email: this.loginForm.value.email,
-      password: this.loginForm.value.password,
-      rol: 'user' // El rol se puede establecer directamente aquí o en el backend
+      password: this.loginForm.value.password
     };
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        localStorage.setItem('token', response.token); // Almacena el token
-        this.redirectUser(response.rol); // Redirigir según el rol
+        this.redirectUser(response.rol);
       },
       error: (err) => {
         this.errorMessage = 'Error en el inicio de sesión. Verifica tus credenciales.';
@@ -59,8 +57,12 @@ export class LoginComponent {
   }
 
   redirectUser(rol: string) {
+    console.log(rol);
+    
     if (rol === 'admin') {
       this.router.navigate(['/dashboard-home']);
+    } else if (rol === 'manager') {
+      this.router.navigate(['/dashboard-manager']);
     } else {
       this.router.navigate(['/dashboard-user']);
     }

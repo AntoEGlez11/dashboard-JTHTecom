@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Dashboard</a>
+    <a class="navbar-brand" href="#">
+      <img src="path_to_your_image/logo.png" alt="Dashboard" style="width: 30px; height: 30px;" class="d-inline-block align-text-top">
+      Dashboard
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -11,7 +14,7 @@
           <a class="nav-link text-light" routerLink="/login">Iniciar Sesión</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
-          <a class="nav-link text-light" routerLink="/perfil">Perfil</a>
+          <a class="nav-link text-light" (click)="openPerfilModal()">Perfil</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn()">
           <a class="nav-link text-light" (click)="logout()">Cerrar Sesión</a>
@@ -20,3 +23,24 @@
     </div>
   </div>
 </nav>
+
+<!-- Modal de Perfil -->
+<div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="perfilModalLabel">Datos del Perfil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="usuario">
+          <p><strong>Nombre:</strong> {{ usuario.user.name }}</p>
+          <p><strong>Email:</strong> {{ usuario.user.email }}</p>
+          <p><strong>Teléfono:</strong> {{ usuario.user.phone }}</p>
+          <button class="btn btn-primary" (click)="goToEditProfile()">Modificar Datos</button>
+        </div>
+        <div *ngIf="!usuario">Cargando...</div>
+      </div>
+    </div>
+  </div>
+</div>

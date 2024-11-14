@@ -10,34 +10,39 @@ import { environment } from '../../config/environments';
 export class DataTecomService {
     constructor(private http:HttpClient) { }
 
+    // Obtener todos los registros de DataAltan
     getDataTecom(): Observable<dataAltan[]> {
         console.log(environment.apiDataAltan);
-        
-        return this.http.get<dataAltan[]>(environment.apiDataAltan).pipe(
-            catchError(this.handleError)
-        )
-    }
-
-    asociarVehiculo(asociacion: { id: any; vehiculo: string }): Observable<any> {
-        return this.http.post(`${environment.apiDataAsociacion}`, asociacion).pipe(
+        return this.http.get<dataAltan[]>(`${environment.apiDataAltan}/all`).pipe(
             catchError(this.handleError)
         );
     }
 
-    // getDataById(id: string | null): Observable<dataAltan> {
-    //     console.log(id);
-        
-    //     return this.http.get<dataAltan>(`${enviroment.apiDataAltanId}/${id}`).pipe(
-    //         catchError(this.handleError));
-    // }
+    // Asociacion de data-altan con vehiculo
+    asociarVehiculo(asociacion: { dataAltanId: number, vehiculoId: number }): Observable<any> {
+        // Endpoint para asociar el vehiculo
+        const url = `${environment.apiDataAltan}/${asociacion.dataAltanId}/associateVehiculo/${asociacion.vehiculoId}`;
+        return this.http.post(url, {}).pipe(
+            catchError(this.handleError)
+        );
+    }
+
+    // Obtener un DataAltan por ID (solo si no incluye el vehiculo asociado)
     getDataById(id: string | null): Observable<dataAltan> {
-        const url = 'assets/data-altanId.json'; // Sin el slash inicial.
+        const url = 'assets/data-altanId.json';  // Para pruebas con archivos estáticos
         console.log('URL:', url);
-      
         return this.http.get<dataAltan>(url).pipe(
-          catchError(this.handleError)
+            catchError(this.handleError)
         );
-      }
+    }
+
+    // Obtener un DataAltan por ID, con el Vehículo asociado
+    getDataByIdWithVehiculo(id: number): Observable<dataAltan> {
+        const url = `${environment.apiDataAltan}/${id}/withVehiculo`;  // Asumiendo que tu endpoint es este
+        return this.http.get<dataAltan>(url).pipe(
+            catchError(this.handleError)
+        );
+    }
 
     private handleError(error: HttpErrorResponse) {
         if (error.status === 0) {

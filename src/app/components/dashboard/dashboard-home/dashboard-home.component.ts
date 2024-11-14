@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ClientAssociationComponent } from "../../client-association/client-association.component";
-import { TableUserComponent } from "../user/table-user/table-user.component";
+import { TableUserComponent } from "../dashboard-manager/table-user/table-user.component";
 import { GestionUsuariosComponent } from "./gestion-usuarios/gestion-usuarios.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';

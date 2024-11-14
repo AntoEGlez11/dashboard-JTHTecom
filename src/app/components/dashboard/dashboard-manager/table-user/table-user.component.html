@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-4">
+      <label for="filtroProducto" class="form-label">Filtrar por Producto</label>
+      <input
+        id="filtroProducto"
+        type="text"
+        [(ngModel)]="filtroProducto"
+        (input)="buscar()"
+        class="form-control"
+        placeholder="Ingrese el nombre del producto"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="filtroSIM" class="form-label">Filtrar por SIM</label>
+      <input
+        id="filtroSIM"
+        type="text"
+        [(ngModel)]="filtroIMSI1"
+        (input)="buscar()"
+        class="form-control"
+        placeholder="Ingrese SIM valido"
+      />
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loading">Cargando datos...</div>
+<table class="table table-hover" *ngIf="!loading">
+  <thead class="table-dark">
+    <tr>
+      <th>Identificador ALtan</th>
+      <th>ICC</th>
+      <th>Numero Télefonico</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of filteredData"
+      (mouseenter)="resaltar(item)"
+      (mouseleave)="quitarResaltar(item)"
+      (click)="verDetalle(item)"
+      [class.table-active]="item === itemSeleccionado"
+      style="cursor: pointer"
+    >
+      <td>{{ item.idAltan }}</td>
+      <td>{{ item.idICCID }} </td>
+      <td>{{ item.idMSISDN }}</td>
+    </tr>
+  </tbody>
+</table>
+

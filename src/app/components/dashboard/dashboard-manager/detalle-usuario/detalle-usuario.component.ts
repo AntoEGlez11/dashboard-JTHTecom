@@ -48,8 +48,8 @@ export class DetalleUsuarioComponent implements OnInit {
     
     if (this.vehiculoForm.valid) {
       const asociacion = {
-        id: this.item.id,
-        vehiculo: this.vehiculoForm.value
+        dataAltanId: this.item.id,  // Utilizando el ID de DataAltan
+        vehiculoId: this.vehiculoForm.value  // Usando el ID del vehículo
       };
 
       this.dataTecomService.asociarVehiculo(asociacion).subscribe({

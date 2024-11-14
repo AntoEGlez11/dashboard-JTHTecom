@@ -1,28 +1,37 @@
-<div class="container mt-5">
-    <h2 class="text-center">Iniciar Sesión</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" id="email" formControlName="email" class="form-control" />
-            <div *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="text-danger">
-                <div *ngIf="loginForm.get('email')?.errors?.['required']">El correo electrónico es requerido.</div>
-                <div *ngIf="loginForm.get('email')?.errors?.['email']">El formato del correo electrónico es inválido.</div>
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="login-container p-4 rounded shadow" style="max-width: 400px; width: 100%; background-color: #ffffff;">
+        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" id="email" formControlName="email" class="form-control" placeholder="Ingrese su correo" />
+                <div *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="text-danger mt-1">
+                    <small *ngIf="loginForm.get('email')?.errors?.['required']">El correo electrónico es requerido.</small>
+                    <small *ngIf="loginForm.get('email')?.errors?.['email']">El formato del correo electrónico es inválido.</small>
+                </div>
             </div>
-        </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" id="password" formControlName="password" class="form-control" />
-            <div *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="text-danger">
-                <div *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida.</div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" formControlName="password" class="form-control" placeholder="Ingrese su contraseña" />
+                <div *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="text-danger mt-1">
+                    <small *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida.</small>
+                </div>
             </div>
+
+            <!-- Mensaje de error general -->
+            <div *ngIf="errorMessage" class="text-danger text-center mb-3">
+                {{ errorMessage }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading || loginForm.invalid">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                {{ isLoading ? 'Cargando...' : 'Iniciar Sesión' }}
+            </button>
+        </form>
+        
+        <div class="text-center mt-3">
+            <a href="/forgot-password" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
         </div>
-
-        <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="isLoading || loginForm.invalid">
-            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            {{ isLoading ? 'Cargando...' : 'Iniciar Sesión' }}
-        </button>
-    </form>
+    </div>
 </div>
