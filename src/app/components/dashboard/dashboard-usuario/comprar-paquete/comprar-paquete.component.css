@@ -1,0 +1,17 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .card-header {
+    background-color: #f8f9fa;
+  }
+  
+  button {
+    margin: 10px;
+  }
+  

@@ -8,34 +8,19 @@ html, body {
 app-root {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Esto asegura que ocupe todo el espacio */
+    min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la pantalla */
 }
 
-/* Aseguramos que el contenedor de contenido ocupe el espacio restante */
+/* El contenedor del contenido ocupa el espacio restante */
 .content-wrapper {
+    flex-grow: 1; /* Permite que el main ocupe el espacio disponible */
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Esto hace que el contenido se expanda */
+    position: relative;
+    background-color: #f9f9f9; /* Fondo de respaldo */
 }
 
-/* El main debería ocupar todo el espacio disponible, empujando el footer hacia abajo */
-main {
-    flex-grow: 1; /* Hace que el main crezca y ocupe el espacio restante */
-}
-
-/* Estilo básico para el footer */
-app-footer {
-    background-color: #f8f9fa;
-    border-top: 1px solid #e9ecef;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-}
-
-.content-wrapper {
-    position: relative; /* Necesario para que el ::before funcione correctamente */
-}
-
+/* Fondo que cubre todo el área disponible */
 .content-wrapper::before {
     content: '';
     position: absolute;
@@ -47,6 +32,25 @@ app-footer {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.1;
+    opacity: 1; /* Ajusta la opacidad según tu preferencia */
     z-index: -1; /* Envía la imagen al fondo */
+}
+
+/* El main debería expandirse para llenar el espacio restante */
+main {
+    flex-grow: 1; /* Crece para ocupar el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar contenido verticalmente si es necesario */
+    align-items: center;
+    z-index: 1; /* Asegura que el contenido esté sobre el fondo */
+}
+
+/* Estilo básico para el footer */
+app-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
 }

@@ -1,0 +1,9 @@
+.dashboard-icon {
+    width: 150px;
+    height: 150px;
+    background-image: url('../../../../../src/assets/img/tecomnet.jpeg');
+    background-size: cover; /* Ajusta la imagen para cubrir el área */
+    background-position: center; /* Centra la imagen */
+    display: inline-block;
+  }
+  

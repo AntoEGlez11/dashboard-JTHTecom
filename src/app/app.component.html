@@ -1,9 +1,7 @@
-<!-- app.component.html -->
-
 <ng-container *ngIf="isLoggedIn(); else login">
   <app-header></app-header>
   <div class="content-wrapper">
-    <main class="flex-grow-1 p-3">
+    <main>
       <router-outlet></router-outlet> <!-- Cargar vistas del dashboard aquí -->
     </main>
   </div>
@@ -11,11 +9,11 @@
 
 <ng-template #login>
   <div class="content-wrapper">
-    <main class="flex-grow-1 p-3">
+    <main>
       <router-outlet></router-outlet> <!-- Mostrar Login aquí -->
     </main>
   </div>
 </ng-template>
 
 <!-- Footer siempre visible al final de la pantalla -->
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

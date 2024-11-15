@@ -64,7 +64,7 @@ export class LoginComponent {
     } else if (rol === 'manager') {
       this.router.navigate(['/dashboard-manager']);
     } else {
-      this.router.navigate(['/dashboard-user']);
+      this.router.navigate(['/dashboard-usuario']);
     }
   }
 }

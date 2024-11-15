@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../../services/main/usuarios.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-usuario',
   standalone: true,
-  imports: [CommonModule ],
+  imports: [CommonModule,  ],
   templateUrl: './dashboard-usuario.component.html',
   styleUrl: './dashboard-usuario.component.css'
 })
@@ -27,7 +28,10 @@ export class DashboardUsuarioComponent implements OnInit {
     { fecha: new Date(), datosUsados: 250 },
     { fecha: new Date(), datosUsados: 50 }
   ];
-  constructor(private usuariosService: UsuariosService) {}
+  constructor(
+    private usuariosService: UsuariosService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.cargarDatosUsuario();
@@ -36,7 +40,13 @@ export class DashboardUsuarioComponent implements OnInit {
 
   cargarDatosUsuario(): void {
     this.usuariosService.obtenerDatosUsuarioLogueado().subscribe(data => {
-      this.usuario = data;
+      console.log(data);
+      
+      this.usuario.email = data.user.email;
+      this.usuario.nombreCompleto = data.user.name;
+      this.usuario.telefono = data.user.phone;
+      
+      
     });
   }
 
@@ -50,7 +60,7 @@ export class DashboardUsuarioComponent implements OnInit {
   }
 
   comprarPaquete(mb: number): void {
-    alert(`Has comprado ${mb} MB adicionales.`);
+    this.router.navigate(['/comprar-paquete', { mb }]);
     // Aquí puedes agregar la lógica para llamar a un endpoint y realizar la compra
   }
 }

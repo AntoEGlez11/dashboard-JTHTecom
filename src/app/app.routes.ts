@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './components/shared/login/forgot-passwo
 import { EditarPerfilComponent } from './components/shared/header/editar-perfil/editar-perfil.component';
 import { DashboardManagerComponent } from './components/dashboard/dashboard-manager/dashboard-manager.component';
 import { DashboardUsuarioComponent } from './components/dashboard/dashboard-usuario/dashboard-usuario.component';
+import { ComprarPaqueteComponent } from './components/dashboard/dashboard-usuario/comprar-paquete/comprar-paquete.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,6 +23,7 @@ export const routes: Routes = [
     { path: 'data-detalle/:id', component: DetalleUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'detalle-asociacion', component: DetalleAsociacionComponent, canActivate: [AuthGuard] },
     { path: 'forgot-password', component: ForgotPasswordComponent },
-    { path: 'editar-perfil', component: EditarPerfilComponent }
+    { path: 'editar-perfil', component: EditarPerfilComponent },
+    { path: 'comprar-paquete', component: ComprarPaqueteComponent }
 
 ];

@@ -11,7 +11,7 @@
             <h5>Datos Personales</h5>
           </div>
           <div class="card-body">
-            <p><strong>Correo Electrónico:</strong> {{ usuario.email }}</p>
+            <p><strong>Correo Electrónico:</strong> {{ usuario.email}}</p>
             <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
           </div>
         </div>
@@ -22,9 +22,10 @@
             <h5>Opciones de Compra de Datos</h5>
           </div>
           <div class="card-body">
-            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(500)">Comprar 500 MB</button>
-            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(1000)">Comprar 1 GB</button>
-            <button class="btn btn-primary w-100" (click)="comprarPaquete(5000)">Comprar 5 GB</button>
+            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(500)">Comprar 500 MB $100.00</button>
+            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(1000)">Comprar 1 GB $135.00</button>
+            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(2000)">Comprar 2 GB $180.00</button>
+            <button class="btn btn-primary me-2 mb-2 w-100" (click)="comprarPaquete(3000)">Comprar 3 GB $240.00</button>
           </div>
         </div>
         
