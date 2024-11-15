@@ -19,7 +19,7 @@ export const routes: Routes = [
         ]
     },
     { path: 'dashboard-manager', component: DashboardManagerComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard-usuario', component: DashboardUsuarioComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard-usuario', component: DashboardUsuarioComponent },
     { path: 'data-detalle/:id', component: DetalleUsuarioComponent, canActivate: [AuthGuard] },
     { path: 'detalle-asociacion', component: DetalleAsociacionComponent, canActivate: [AuthGuard] },
     { path: 'forgot-password', component: ForgotPasswordComponent },

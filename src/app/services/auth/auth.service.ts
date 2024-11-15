@@ -1,55 +1,68 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, delay, map, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { authResponse } from '../../interfaces/authResponse';
 import { AuthRequest } from '../../interfaces/authRequest';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  
-
+  apiUrl: any;
   constructor(private http: HttpClient) {}
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('Se ha producido un error:', error.error);
     } else {
-      console.error('El backend retornó un código de estado:', error.status, error.error);
+      console.error(
+        'El backend retornó un código de estado:',
+        error.status,
+        error.error
+      );
     }
     return throwError(() => new Error('Algo falló. Por favor intente nuevamente'));
   }
 
-  // Metodo para obtener las credenciales de usuarios email y password y rol
+  // Método para validar las credenciales de usuario
   login(credentials: AuthRequest): Observable<authResponse> {
-    const loginUrl= "assets/mock-login.json"; // cambiar para URL de backend
+    const allowedEmail = 'user@user.com';
+    const allowedPassword = 'user';
 
-    console.log('Intento de login con:', credentials);
-    return this.http.post<authResponse>(loginUrl, credentials).pipe(
-      map(response => {
-        // Guarda token y rol en localStorage
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('rol', response.rol);
+    if (
+      credentials.email === allowedEmail &&
+      credentials.password === allowedPassword
+    ) {
+      // Mock de respuesta en caso de éxito
+      const response: authResponse = {
+        email: credentials.email,
+        rol: 'user',
+        token: 'mock-jwt-token',
+        password: '',
+      };
 
-        return response;
-      }),
-      catchError(this.handleError)
-    );
+      // Guarda el token y rol en localStorage
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('rol', response.rol);
 
+      return of(response); // Simula una respuesta exitosa
+    } else {
+      // Devuelve un error cuando las credenciales no coinciden
+      return throwError(() =>
+        new Error('Credenciales incorrectas. Inténtalo de nuevo.')
+      );
+    }
   }
-  
-  // Deslogueo de Dashboard
+
+  // Método para cerrar sesión
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('rol');
   }
 
-  // Obtener correo electronico por olvido
+  // Obtener correo electrónico para restablecimiento de contraseña
   requestPasswordReset(email: string): Observable<any> {
-    const apiURl = '`${this.apiUrl}/auth/forgot-password`, { email }'; // crear endpoint
-    return this.http.post(apiURl,{email});
+    const apiURl = `${this.apiUrl}/auth/forgot-password`; // Crear endpoint
+    return this.http.post(apiURl, { email }).pipe(catchError(this.handleError));
   }
-
-  
 }
