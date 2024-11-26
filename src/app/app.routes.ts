@@ -10,20 +10,27 @@ import { EditarPerfilComponent } from './components/shared/header/editar-perfil/
 import { DashboardManagerComponent } from './components/dashboard/dashboard-manager/dashboard-manager.component';
 import { DashboardUsuarioComponent } from './components/dashboard/dashboard-usuario/dashboard-usuario.component';
 import { ComprarPaqueteComponent } from './components/dashboard/dashboard-usuario/comprar-paquete/comprar-paquete.component';
+import { GraficosAdminComponent } from './components/dashboard/dashboard-home/graficos-admin/graficos-admin.component';
+import { ReportesComponent } from './components/dashboard/dashboard-home/reportes/reportes.component';
+import { DashboardClienteComponent } from './components/dashboard/dashboard-cliente/dashboard-cliente.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    {
-        path: 'dashboard-home', component: DashboardHomeComponent, canActivate: [AuthGuard], children: [{ path: 'usuarios', component: GestionUsuariosComponent, }
+    { path: 'dashboard-home', 
+        component: DashboardHomeComponent,
+        children: [ // Rutas hijas para dashboard-home
+          { path: 'inicio', component: GraficosAdminComponent }, // Componente principal de Inicio
+          { path: 'usuarios', component: GestionUsuariosComponent }, // Componente para Usuarios
+          { path: 'reportes', component: ReportesComponent }, // Componente para Reportes
         ]
-    },
-    { path: 'dashboard-manager', component: DashboardManagerComponent, canActivate: [AuthGuard] },
+      },
+    { path: 'dashboard-manager', component: DashboardManagerComponent },
+    { path: 'dashboard-cliente', component: DashboardClienteComponent },
     { path: 'dashboard-usuario', component: DashboardUsuarioComponent },
-    { path: 'data-detalle/:id', component: DetalleUsuarioComponent, canActivate: [AuthGuard] },
-    { path: 'detalle-asociacion', component: DetalleAsociacionComponent, canActivate: [AuthGuard] },
+    { path: 'data-detalle/:id', component: DetalleUsuarioComponent },
+    { path: 'detalle-asociacion', component: DetalleAsociacionComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: 'editar-perfil', component: EditarPerfilComponent },
     { path: 'comprar-paquete', component: ComprarPaqueteComponent }
-
 ];

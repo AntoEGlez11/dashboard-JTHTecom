@@ -1,19 +1,19 @@
 <ng-container *ngIf="isLoggedIn(); else login">
   <app-header></app-header>
-  <div class="content-wrapper">
-    <main>
-      <router-outlet></router-outlet> <!-- Cargar vistas del dashboard aquí -->
-    </main>
+  <div class="dashboard-container">
+    <app-sidebar></app-sidebar> <!-- Aquí se incluye el sidebar -->
+    <div class="content-area">
+      <main>
+        <router-outlet></router-outlet> <!-- Este es el espacio para las rutas hijas -->
+      </main>
+    </div>
   </div>
 </ng-container>
 
 <ng-template #login>
-  <div class="content-wrapper">
+  <div>
     <main>
-      <router-outlet></router-outlet> <!-- Mostrar Login aquí -->
+      <router-outlet></router-outlet> <!-- Aquí solo se muestra el contenido para rutas no logueadas -->
     </main>
   </div>
 </ng-template>
-
-<!-- Footer siempre visible al final de la pantalla -->
-<!-- <app-footer></app-footer> -->

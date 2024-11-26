@@ -11,6 +11,13 @@ export class AuthService {
   apiUrl: any;
   constructor(private http: HttpClient) {}
 
+  private users = [
+    { email: 'admin@ejemplo.com', password: 'admin123', rol: 'admin' },
+    { email: 'moderator@ejemplo.com', password: 'mod123', rol: 'manager-movil' }, // asigna SIM con vehiculo
+    { email: 'guest@ejemplo.com', password: 'guest123', rol: 'manager-user' }, //asigna SIM-Vehiculo con cliente
+    { email: 'user@ejemplo.com', password: 'user123', rol: 'user' },
+  ];
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('Se ha producido un error:', error.error);
@@ -26,23 +33,19 @@ export class AuthService {
 
   // Método para validar las credenciales de usuario
   login(credentials: AuthRequest): Observable<authResponse> {
-    const allowedEmail = 'user@user.com';
-    const allowedPassword = 'user';
+    const user = this.users.find(
+      (u) => u.email === credentials.email && u.password === credentials.password
+    );
 
-    if (
-      credentials.email === allowedEmail &&
-      credentials.password === allowedPassword
-    ) {
+    if (user) {
       // Mock de respuesta en caso de éxito
       const response: authResponse = {
-        email: credentials.email,
-        rol: 'user',
-        token: 'mock-jwt-token',
+        email: user.email,
+        rol: user.rol,
         password: '',
       };
 
-      // Guarda el token y rol en localStorage
-      localStorage.setItem('token', response.token);
+      // Guarda el rol en localStorage
       localStorage.setItem('rol', response.rol);
 
       return of(response); // Simula una respuesta exitosa

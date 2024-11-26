@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { ClientAssociationComponent } from "../../client-association/client-association.component";
-import { TableUserComponent } from "../dashboard-manager/table-user/table-user.component";
-import { GestionUsuariosComponent } from "./gestion-usuarios/gestion-usuarios.component";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from '../../shared/header/header.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
+import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 
 @Component({
   selector: 'app-dashboard-home',
   standalone: true,
   imports: [
     RouterModule,
-    GestionUsuariosComponent,
-    SidebarComponent
+    HeaderComponent,
+    FooterComponent,
+    GestionUsuariosComponent
   ],
   templateUrl: './dashboard-home.component.html',
   styleUrl: './dashboard-home.component.css'

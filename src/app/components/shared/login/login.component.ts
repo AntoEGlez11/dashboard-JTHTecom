@@ -61,10 +61,12 @@ export class LoginComponent {
     
     if (rol === 'admin') {
       this.router.navigate(['/dashboard-home']);
-    } else if (rol === 'manager') {
+    } else if (rol === 'manager-movil') {
       this.router.navigate(['/dashboard-manager']);
+    } else if (rol === 'manager-user'){
+      this.router.navigate(['/dashboard-cliente']);
     } else {
-      this.router.navigate(['/dashboard-usuario']);
+      this.router.navigate(['/dashboard-usuario'])
     }
   }
 }
